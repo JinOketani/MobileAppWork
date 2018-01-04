@@ -1,0 +1,30 @@
+<!DOCTYPE>
+<html lang="ja">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" >
+  <script type="text/javascript" src="data.js"></script>
+  <script type="text/javascript" src="domain.js"></script>
+  <title>Next Bus</title>
+</head>
+
+<body onLoad="startClock()">
+  <div id="clock_frame">
+    現在時刻：<span id="clock_time"></span>
+  </div>
+  <div id="bus_area">
+    <span id="bus_stop"></span>
+    <table>
+      <tr>
+        <td>今度のバス</td><td><span id="bus"></span></td>
+        <td>（出発まで・・ <span id ="timeLeft"></span>）</td>
+      </tr>
+      <tr><td>次のバス</td><td><span id="nbus"></span> </td></tr>
+      <tr><td>その次のバス</td><td><span id="nnbus"></span> </td></tr>
+    </table>
+    <br />
+    <div id="btn">
+    </div>
+    <br>
+  </div>
+</body>
+</html>
