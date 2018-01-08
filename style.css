@@ -1,0 +1,92 @@
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-family: "ＭＳ ゴシック", sans-serif;
+}
+
+header {
+    height: 50%;
+    width: 100%;
+}
+
+#main {
+    height: 30%;
+    width: 100%;
+}
+
+footer {
+    height: 20%;
+    width: 100%;
+}
+
+#bg {
+    height: 100px;
+    background-color: mediumseagreen;
+}
+
+#title {
+    margin-top: 2%;;
+    font-size: 40px;
+    border-bottom: medium solid #a9a9a9;
+}
+
+#bus_stop {
+    font-size: 60px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    border-bottom: medium solid #a9a9a9;
+    font-weight: bold;
+
+}
+
+#bus {
+    margin: 0 auto;
+    text-align: center;
+}
+
+#bus_area {
+    font-size: 100px;
+}
+
+#bus_stop_form {
+    font-size: 30px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    border-bottom: medium solid #a9a9a9;
+}
+
+.bus_text {
+    font-size: 40px;
+}
+
+#bus_left {
+    margin-right: 25%;
+}
+
+#bus_right {
+    margin-left: 25%;
+}
+
+.time-table-text-right {
+    font-size: 40px;
+    margin-left: 25%;
+}
+
+.time-table-text-left {
+    font-size: 40px;
+
+    margin-right: 25%;
+}
+
+#bus_stop_select {
+    width: 100%;
+    font-size: 40px;
+    text-align: center;
+}
+
+label {
+    margin-left: 20px;
+}
