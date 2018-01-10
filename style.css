@@ -17,22 +17,22 @@ body {
 }
 
 header {
-    height: 40%;
+    height: 50%;
     width: 100%;
 }
 
 footer {
-    height: 30%;
+    height: 15%;
     width: 100%;
 }
 
 #main {
-    height: 30%;
+    height: 35%;
     width: 100%;
 }
 
 #bg {
-    height: 300px;
+    height: 150px;
     background-color: mediumseagreen;
 }
 
