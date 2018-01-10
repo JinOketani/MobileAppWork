@@ -17,62 +17,39 @@ function hm2Time(hm) {
 }
 
 function tableSet() {
-    cycle = "cycle_right";
-    console.log(cycle);
+    var cycle_num = inputCycleValue();
 
-     if (cycle == "cycle_right") {
-        for (i = 0; i < tblData.length; i++) {
-            var bTable = tblData[i];
-            for (j = 0; j < bTable.length; j++) {
-                if (bTable[j].charAt(0) == "#") {
-                    // バス停名を先頭要素にセット
-                    var tbleEl = [bTable[j].substring(2)];
-                } else {
-                    var lineData = bTable[j].split(":");
-                    var hh = lineData[0];
-                    // ：の前が数字の場合
-                    if (isFinite(hh)) {
-                        var minData = lineData[1].split(" ");
-                        for (k = 0; k < minData.length; k++) {
-                            // 正規表現を用いて半角数字の文字列を全て""にする
-                            var mm = (minData[k]).replace(/\D/g, "");
-                            var hhmm = hh * 100 + parseInt(mm, 10);
-                            if (isFinite(hhmm)) {
-                                tbleEl.push(hhmm);
-                            }
+    if (cycle_num == 0) {
+        tblData = rightData;
+    } else {
+        tblData = leftData;
+    }
+
+    for (i = 0; i < tblData.length; i++) {
+        var bTable = tblData[i];
+        for (j = 0; j < bTable.length; j++) {
+            if (bTable[j].charAt(0) == "#") {
+                // バス停名を先頭要素にセット
+                var tbleEl = [bTable[j].substring(2)];
+            } else {
+                var lineData = bTable[j].split(":");
+                var hh = lineData[0];
+                // ：の前が数字の場合
+                if (isFinite(hh)) {
+                    var minData = lineData[1].split(" ");
+                    for (k = 0; k < minData.length; k++) {
+                        // 正規表現を用いて半角数字の文字列を全て""にする
+                        var mm = (minData[k]).replace(/\D/g, "");
+                        var hhmm = hh * 100 + parseInt(mm, 10);
+                        if (isFinite(hhmm)) {
+                            tbleEl.push(hhmm);
                         }
                     }
                 }
             }
-            busTables.push(tbleEl);
         }
-     } else {
-        for (i = 0; i < left_tblData.length; i++) {
-            var bTable = left_tblData[i];
-            for (j = 0; j < bTable.length; j++) {
-                if (bTable[j].charAt(0) == "#") {
-                    // バス停名を先頭要素にセット
-                    var tbleEl = [bTable[j].substring(2)];
-                } else {
-                    var lineData = bTable[j].split(":");
-                    var hh = lineData[0];
-                    // ：の前が数字の場合
-                    if (isFinite(hh)) {
-                        var minData = lineData[1].split(" ");
-                        for (k = 0; k < minData.length; k++) {
-                            // 正規表現を用いて半角数字の文字列を全て""にする
-                            var mm = (minData[k]).replace(/\D/g, "");
-                            var hhmm = hh * 100 + parseInt(mm, 10);
-                            if (isFinite(hhmm)) {
-                                tbleEl.push(hhmm);
-                            }
-                        }
-                    }
-                }
-            }
-            busTables.push(tbleEl);
-        }
-     }
+        busTables.push(tbleEl);
+    }
 }
 
 function clock() {
@@ -97,10 +74,10 @@ function clock() {
     // 次に来るバス
     document.getElementById("bus").innerHTML = hm(bTime);
     // 次に来るバスのの出発までの時間
-    document.getElementById("timeLeft").innerHTML = hms(bTime - nowTime);
+    document.getElementById("timeLeft").innerHTML = "<span class='time-text'>残り</span>" + hms(bTime - nowTime) + "<span class='time-text'>後</span>";
 };
 
-window.onload = function startClock() {
+function startClock() {
     tableSet();
     // バス停をセレクトに追加
     var btn_element = "";
@@ -112,14 +89,6 @@ window.onload = function startClock() {
     setInterval(clock, 1000);
 };
 
-function inputCycle() {
-    var index = document.cycle_form.cycle_select.selectedIndex;
-    var value = document.cycle_form.cycle_select.options[index].value;
-    cycle = value;
-
-    console.log(cycle);
-}
-
 function inputValue() {
     tableSet();
 
@@ -128,4 +97,11 @@ function inputValue() {
     tableNo = value;
 
     setInterval(clock, 1000);
+}
+
+function inputCycleValue() {
+    var num = document.cycle_form.bus_cycle_select.selectedIndex;
+    var val = document.cycle_form.bus_cycle_select.options[num].value;
+
+    return val;
 }
