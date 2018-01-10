@@ -1,19 +1,25 @@
 var busTables = [];
 
 // 時:分:秒のフォーマトに変換
-function hms(tim) {
-    if (tim == '') return ' ';
-    return ('00' + Math.floor(tim / (60 * 60))).slice(-2) + ':' + ('00' + Math.floor((tim % (60 * 60)) / 60)).slice(-2) + ':' + ('00' + (tim % 60)).slice(-2);
+function hms(time) {
+    if (time != '') {
+        return ('00' + Math.floor(time / (60 * 60))).slice(-2) + ':' + ('00' + Math.floor((time % (60 * 60)) / 60)).slice(-2) + ':' + ('00' + (time % 60)).slice(-2);
+    } else {
+        return '';
+    }
 };
 
 // 時:分のフォーマットに変換
-function hm(tim) {
-    if (tim == '') return ' ';
-    return ('00' + Math.floor(tim / (60 * 60))).slice(-2) + ':' + ('00' + Math.floor((tim % (60 * 60)) / 60)).slice(-2);
+function hm(time) {
+    if (time != '') {
+        return ('00' + Math.floor(time / (60 * 60))).slice(-2) + ':' + ('00' + Math.floor((time % (60 * 60)) / 60)).slice(-2);
+    } else {
+        return '';
+    }
 };
 
-function hm2Time(hm) {
-    return (Math.floor((hm / 100)) * (60 * 60) + (hm % 100) * 60);
+function convTime(time) {
+    return (Math.floor((time / 100)) * (60 * 60) + (time % 100) * 60);
 }
 
 function tableSet() {
@@ -26,13 +32,13 @@ function tableSet() {
     }
 
     for (i = 0; i < tblData.length; i++) {
-        var bTable = tblData[i];
-        for (j = 0; j < bTable.length; j++) {
-            if (bTable[j].charAt(0) == "#") {
+        var timeTable = tblData[i];
+        for (j = 0; j < timeTable.length; j++) {
+            if (timeTable[j].charAt(0) == "#") {
                 // バス停名を先頭要素にセット
-                var tbleEl = [bTable[j].substring(2)];
+                var busStop = [timeTable[j].substring(2)];
             } else {
-                var lineData = bTable[j].split(":");
+                var lineData = timeTable[j].split(":");
                 var hh = lineData[0];
                 // ：の前が数字の場合
                 if (isFinite(hh)) {
@@ -42,30 +48,30 @@ function tableSet() {
                         var mm = (minData[k]).replace(/\D/g, "");
                         var hhmm = hh * 100 + parseInt(mm, 10);
                         if (isFinite(hhmm)) {
-                            tbleEl.push(hhmm);
+                            busStop.push(hhmm);
                         }
                     }
                 }
             }
         }
-        busTables.push(tbleEl);
+        busTables.push(busStop);
     }
 }
 
 function clock() {
-    document.getElementById("bus_stop").innerHTML = busTables[tableNo][0];
+    document.getElementById("bus_stop").innerHTML = busTables[busTableNo][0];
     var now = new Date();
     var nowTime = (now.getHours() * 60 * 60) + (now.getMinutes() * 60) + now.getSeconds();
     var bTime, nbTime, nnbTime;
     bTime = '';
-    for (var i = 1; i < busTables[tableNo].length; i++) {
-        var bt = busTables[tableNo][i];
+    for (var i = 1; i < busTables[busTableNo].length; i++) {
+        var bt = busTables[busTableNo][i];
         if (bt > (now.getHours() * 100 + now.getMinutes())) {
-            bTime = hm2Time(bt);
-            if ((i + 1) < busTables[tableNo].length) {
-                nbTime = hm2Time(busTables[tableNo][i + 1]);
-                if ((i + 2) < busTables[tableNo].length) {
-                    nnbTime = hm2Time(busTables[tableNo][i + 2]);
+            bTime = convTime(bt);
+            if ((i + 1) < busTables[busTableNo].length) {
+                nbTime = convTime(busTables[busTableNo][i + 1]);
+                if ((i + 2) < busTables[busTableNo].length) {
+                    nnbTime = convTime(busTables[busTableNo][i + 2]);
                 }
             }
             break;
@@ -81,7 +87,7 @@ function startClock() {
     tableSet();
     // バス停をセレクトに追加
     var btn_element = "";
-    tableNo = 0;
+    busTableNo = 0;
     for (i = 0; i < busTables.length; i++) {
         btn_element = btn_element + '<option value="' + i + '">' + busTables[i][0];
         document.getElementById("bus_stop_select").innerHTML = btn_element;
@@ -89,12 +95,12 @@ function startClock() {
     setInterval(clock, 1000);
 };
 
-function inputValue() {
+function inputBusStopValue() {
     tableSet();
 
     var index = document.bus_form.bus_stop_select.selectedIndex;
     var value = document.bus_form.bus_stop_select.options[index].value;
-    tableNo = value;
+    busTableNo = value;
 
     setInterval(clock, 1000);
 }
