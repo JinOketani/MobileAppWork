@@ -90,3 +90,28 @@ footer {
 label {
     margin-left: 20px;
 }
+
+#cycle_form {
+    font-size: 30px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    border-bottom: medium solid #a9a9a9;
+}
+
+#bus_cycle_select {
+    width: 100%;
+    font-size: 40px;
+    text-align: center;
+}
+
+.time-text {
+    font-size: 40px;
+}
+
+#button_refresh {
+    color: dimgray;
+}
+
+#button_refresh:active {
+    color: darkgrey;
+}

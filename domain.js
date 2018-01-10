@@ -17,6 +17,14 @@ function hm2Time(hm) {
 }
 
 function tableSet() {
+    var cycle_num = inputCycleValue();
+
+    if (cycle_num == 0) {
+        tblData = rightData;
+    } else {
+        tblData = leftData;
+    }
+
     for (i = 0; i < tblData.length; i++) {
         var bTable = tblData[i];
         for (j = 0; j < bTable.length; j++) {
@@ -66,10 +74,10 @@ function clock() {
     // 次に来るバス
     document.getElementById("bus").innerHTML = hm(bTime);
     // 次に来るバスのの出発までの時間
-    document.getElementById("timeLeft").innerHTML = hms(bTime - nowTime);
+    document.getElementById("timeLeft").innerHTML = "<span class='time-text'>残り</span>" + hms(bTime - nowTime) + "<span class='time-text'>後</span>";
 };
 
-window.onload = function startClock() {
+function startClock() {
     tableSet();
     // バス停をセレクトに追加
     var btn_element = "";
@@ -89,4 +97,11 @@ function inputValue() {
     tableNo = value;
 
     setInterval(clock, 1000);
+}
+
+function inputCycleValue() {
+    var num = document.cycle_form.bus_cycle_select.selectedIndex;
+    var val = document.cycle_form.bus_cycle_select.options[num].value;
+
+    return val;
 }
