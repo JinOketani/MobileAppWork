@@ -22,7 +22,7 @@
     <i id="button_refresh" class="fa fa-refresh fa-4x" aria-hidden="true" onclick="startClock()"></i>
     <div id="bus_stop"></div>
     <form name="bus_form" id="bus_stop_form">
-        <select id="bus_stop_select" name='bus_stop_select' onchange="inputValue()"></select>
+        <select id="bus_stop_select" name='bus_stop_select' onchange="inputBusStopValue"></select>
     </form>
 </header>
 <div id="main">
@@ -39,8 +39,8 @@
         <span class="time-table-text-right">右周り</span>
     </div>
     <div class="icon_area">
-        <i id="bus_left" class="fa fa-arrow-left fa-5x" aria-hidden="true"></i>
-        <i id="bus_right" class="fa fa-arrow-right fa-5x" aria-hidden="true"></i>
+        <a href="left_time_table.html"><i id="bus_left" class="fa fa-arrow-left fa-5x" aria-hidden="true"></i></a>
+        <a href="right_time_table.html"><i id="bus_right" class="fa fa-arrow-right fa-5x" aria-hidden="true"></i></a>
     </div>
 </footer>
 </body>
