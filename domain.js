@@ -17,31 +17,62 @@ function hm2Time(hm) {
 }
 
 function tableSet() {
-    for (i = 0; i < tblData.length; i++) {
-        var bTable = tblData[i];
-        for (j = 0; j < bTable.length; j++) {
-            if (bTable[j].charAt(0) == "#") {
-                // バス停名を先頭要素にセット
-                var tbleEl = [bTable[j].substring(2)];
-            } else {
-                var lineData = bTable[j].split(":");
-                var hh = lineData[0];
-                // ：の前が数字の場合
-                if (isFinite(hh)) {
-                    var minData = lineData[1].split(" ");
-                    for (k = 0; k < minData.length; k++) {
-                        // 正規表現を用いて半角数字の文字列を全て""にする
-                        var mm = (minData[k]).replace(/\D/g, "");
-                        var hhmm = hh * 100 + parseInt(mm, 10);
-                        if (isFinite(hhmm)) {
-                            tbleEl.push(hhmm);
+    cycle = "cycle_right";
+    console.log(cycle);
+
+     if (cycle == "cycle_right") {
+        for (i = 0; i < tblData.length; i++) {
+            var bTable = tblData[i];
+            for (j = 0; j < bTable.length; j++) {
+                if (bTable[j].charAt(0) == "#") {
+                    // バス停名を先頭要素にセット
+                    var tbleEl = [bTable[j].substring(2)];
+                } else {
+                    var lineData = bTable[j].split(":");
+                    var hh = lineData[0];
+                    // ：の前が数字の場合
+                    if (isFinite(hh)) {
+                        var minData = lineData[1].split(" ");
+                        for (k = 0; k < minData.length; k++) {
+                            // 正規表現を用いて半角数字の文字列を全て""にする
+                            var mm = (minData[k]).replace(/\D/g, "");
+                            var hhmm = hh * 100 + parseInt(mm, 10);
+                            if (isFinite(hhmm)) {
+                                tbleEl.push(hhmm);
+                            }
                         }
                     }
                 }
             }
+            busTables.push(tbleEl);
         }
-        busTables.push(tbleEl);
-    }
+     } else {
+        for (i = 0; i < left_tblData.length; i++) {
+            var bTable = left_tblData[i];
+            for (j = 0; j < bTable.length; j++) {
+                if (bTable[j].charAt(0) == "#") {
+                    // バス停名を先頭要素にセット
+                    var tbleEl = [bTable[j].substring(2)];
+                } else {
+                    var lineData = bTable[j].split(":");
+                    var hh = lineData[0];
+                    // ：の前が数字の場合
+                    if (isFinite(hh)) {
+                        var minData = lineData[1].split(" ");
+                        for (k = 0; k < minData.length; k++) {
+                            // 正規表現を用いて半角数字の文字列を全て""にする
+                            var mm = (minData[k]).replace(/\D/g, "");
+                            var hhmm = hh * 100 + parseInt(mm, 10);
+                            if (isFinite(hhmm)) {
+                                tbleEl.push(hhmm);
+                            }
+                        }
+                    }
+                }
+            }
+            busTables.push(tbleEl);
+        }
+     }
 }
 
 function clock() {
@@ -84,6 +115,9 @@ window.onload = function startClock() {
 function inputCycle() {
     var index = document.cycle_form.cycle_select.selectedIndex;
     var value = document.cycle_form.cycle_select.options[index].value;
+    cycle = value;
+
+    console.log(cycle);
 }
 
 function inputValue() {
