@@ -81,6 +81,11 @@ window.onload = function startClock() {
     setInterval(clock, 1000);
 };
 
+function inputCycle() {
+    var index = document.cycle_form.cycle_select.selectedIndex;
+    var value = document.cycle_form.cycle_select.options[index].value;
+}
+
 function inputValue() {
     tableSet();
 

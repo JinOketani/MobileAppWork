@@ -12,7 +12,13 @@
 <body class="center-block">
 <header>
     <div id="bg">背景</div>
-    <div id="title">城下まち金沢周遊バス（右回り）</div>
+    <form name="cycle_form" id="cycle_form">
+        <select name="cycle_select" id="cycle_select" onchange="inputCycle()">
+            <option value="cycle_right">城下まち金沢周遊バス（右回り）</option>
+            <option value="cycle_left">城下まち金沢周遊バス（左回り）</option>
+        </select>
+    </form>
+    <div id="title"></div>
     <div id="bus_stop"></div>
     <form name="bus_form" id="bus_stop_form">
         <select id="bus_stop_select" name='bus_stop_select' onchange="inputValue()"></select>
