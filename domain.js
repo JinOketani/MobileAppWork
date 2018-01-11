@@ -1,15 +1,15 @@
 var busTables = [];
 
 // 時:分:秒のフォーマトに変換
-function hms(tim) {
-    if (tim == '') return '終了';
-    return ('00' + Math.floor(tim / (60 * 60))).slice(-2) + ':' + ('00' + Math.floor((tim % (60 * 60)) / 60)).slice(-2) + ':' + ('00' + (tim % 60)).slice(-2);
+function hms(time) {
+    if (time == '') return '終了';
+    return ('00' + Math.floor(time / (60 * 60))).slice(-2) + ':' + ('00' + Math.floor((time % (60 * 60)) / 60)).slice(-2) + ':' + ('00' + (time % 60)).slice(-2);
 };
 
 // 時:分のフォーマットに変換
-function hm(tim) {
-    if (tim == '') return '終了';
-    return ('00' + Math.floor(tim / (60 * 60))).slice(-2) + ':' + ('00' + Math.floor((tim % (60 * 60)) / 60)).slice(-2);
+function hm(time) {
+    if (time == '') return '終了';
+    return ('00' + Math.floor(time / (60 * 60))).slice(-2) + ':' + ('00' + Math.floor((time % (60 * 60)) / 60)).slice(-2);
 };
 
 function convTime(hm) {
