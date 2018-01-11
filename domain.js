@@ -1,28 +1,22 @@
 var busTables = [];
 
 // 時:分:秒のフォーマトに変換
-function hms(time) {
-    if (time != '') {
-        return ('00' + Math.floor(time / (60 * 60))).slice(-2) + ':' + ('00' + Math.floor((time % (60 * 60)) / 60)).slice(-2) + ':' + ('00' + (time % 60)).slice(-2);
-    } else {
-        return '';
-    }
+function hms(tim) {
+    if (tim == '') return '終了';
+    return ('00' + Math.floor(tim / (60 * 60))).slice(-2) + ':' + ('00' + Math.floor((tim % (60 * 60)) / 60)).slice(-2) + ':' + ('00' + (tim % 60)).slice(-2);
 };
 
 // 時:分のフォーマットに変換
-function hm(time) {
-    if (time != '') {
-        return ('00' + Math.floor(time / (60 * 60))).slice(-2) + ':' + ('00' + Math.floor((time % (60 * 60)) / 60)).slice(-2);
-    } else {
-        return '';
-    }
+function hm(tim) {
+    if (tim == '') return '終了';
+    return ('00' + Math.floor(tim / (60 * 60))).slice(-2) + ':' + ('00' + Math.floor((tim % (60 * 60)) / 60)).slice(-2);
 };
 
-function convTime(time) {
-    return (Math.floor((time / 100)) * (60 * 60) + (time % 100) * 60);
+function convTime(hm) {
+    return (Math.floor((hm / 100)) * (60 * 60) + (hm % 100) * 60);
 }
 
-function tableSet() {
+function busTableSet() {
     var cycle_num = inputCycleValue();
 
     if (cycle_num == 0) {
@@ -32,13 +26,13 @@ function tableSet() {
     }
 
     for (i = 0; i < tblData.length; i++) {
-        var timeTable = tblData[i];
-        for (j = 0; j < timeTable.length; j++) {
-            if (timeTable[j].charAt(0) == "#") {
+        var bTable = tblData[i];
+        for (j = 0; j < bTable.length; j++) {
+            if (bTable[j].charAt(0) == "#") {
                 // バス停名を先頭要素にセット
-                var busStop = [timeTable[j].substring(2)];
+                var tbleEl = [bTable[j].substring(2)];
             } else {
-                var lineData = timeTable[j].split(":");
+                var lineData = bTable[j].split(":");
                 var hh = lineData[0];
                 // ：の前が数字の場合
                 if (isFinite(hh)) {
@@ -48,17 +42,17 @@ function tableSet() {
                         var mm = (minData[k]).replace(/\D/g, "");
                         var hhmm = hh * 100 + parseInt(mm, 10);
                         if (isFinite(hhmm)) {
-                            busStop.push(hhmm);
+                            tbleEl.push(hhmm);
                         }
                     }
                 }
             }
         }
-        busTables.push(busStop);
+        busTables.push(tbleEl);
     }
 }
 
-function clock() {
+function busClock() {
     document.getElementById("bus_stop").innerHTML = busTables[busTableNo][0];
     var now = new Date();
     var nowTime = (now.getHours() * 60 * 60) + (now.getMinutes() * 60) + now.getSeconds();
@@ -84,25 +78,26 @@ function clock() {
 };
 
 function startClock() {
-    tableSet();
+    busTableSet();
     // バス停をセレクトに追加
-    var btn_element = "";
+    var select = "";
+    //初期値0(金沢駅東口)
     busTableNo = 0;
     for (i = 0; i < busTables.length; i++) {
-        btn_element = btn_element + '<option value="' + i + '">' + busTables[i][0];
-        document.getElementById("bus_stop_select").innerHTML = btn_element;
+        select = select + '<option value="' + i + '">' + busTables[i][0];
+        document.getElementById("bus_stop_select").innerHTML = select;
     }
-    setInterval(clock, 1000);
+    setInterval(busClock, 1000);
 };
 
-function inputBusStopValue() {
-    tableSet();
+function inputValue() {
+    busTableSet();
 
     var index = document.bus_form.bus_stop_select.selectedIndex;
     var value = document.bus_form.bus_stop_select.options[index].value;
     busTableNo = value;
 
-    setInterval(clock, 1000);
+    setInterval(busClock, 1000);
 }
 
 function inputCycleValue() {
