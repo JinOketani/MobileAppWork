@@ -29,7 +29,7 @@ function busTableSet() {
         var busTable = busData[i];
         for (n = 0; n < busTable.length; n++) {
             if (busTable[n].charAt(0) == "#") {
-                var tbleEl = [busTable[n].substring(2)];
+                var busStop = [busTable[n].substring(2)];
             } else {
                 var lineData = busTable[n].split(":");
                 var hh = lineData[0];
@@ -41,13 +41,13 @@ function busTableSet() {
                         var mm = (minData[k]).replace(/\D/g, "");
                         var hhmm = hh * 100 + parseInt(mm, 10);
                         if (isFinite(hhmm)) {
-                            tbleEl.push(hhmm);
+                            busStop.push(hhmm);
                         }
                     }
                 }
             }
         }
-        busTables.push(tbleEl);
+        busTables.push(busStop);
     }
 }
 
