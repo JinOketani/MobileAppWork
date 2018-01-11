@@ -20,13 +20,13 @@ function busTableSet() {
     var cycle_num = inputCycleValue();
 
     if (cycle_num == 0) {
-        tblData = rightData;
+        busData = rightData;
     } else {
-        tblData = leftData;
+        busData = leftData;
     }
 
-    for (i = 0; i < tblData.length; i++) {
-        var bTable = tblData[i];
+    for (i = 0; i < busData.length; i++) {
+        var bTable = busData[i];
         for (j = 0; j < bTable.length; j++) {
             if (bTable[j].charAt(0) == "#") {
                 // バス停名を先頭要素にセット
