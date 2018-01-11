@@ -26,13 +26,12 @@ function busTableSet() {
     }
 
     for (i = 0; i < busData.length; i++) {
-        var bTable = busData[i];
-        for (j = 0; j < bTable.length; j++) {
-            if (bTable[j].charAt(0) == "#") {
-                // バス停名を先頭要素にセット
-                var tbleEl = [bTable[j].substring(2)];
+        var busTable = busData[i];
+        for (n = 0; n < busTable.length; n++) {
+            if (busTable[n].charAt(0) == "#") {
+                var tbleEl = [busTable[n].substring(2)];
             } else {
-                var lineData = bTable[j].split(":");
+                var lineData = busTable[n].split(":");
                 var hh = lineData[0];
                 // ：の前が数字の場合
                 if (isFinite(hh)) {
